@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="App and game designs by Mariyam Nesha – app icons, ASO screenshots, feature graphics and more.">
+  <title>Apps | Mariyam Nesha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F47B20;
+      --peach: #FFD3B4;
+      --peach-line: #F9B98C;
+      --light: #FCE6D6;
+      --tan: #DDA987;
+      --brown: #C98A5E;
+      --dark: #161616;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+
+    /* ---------- Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto;
+      background: var(--dark); border-radius: 50px; height: 86px;
+      padding: 0 8px 0 34px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; display: block; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px;
+      padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+
+    /* ---------- Title ---------- */
+    .page-title { text-align: center; font-size: 48px; font-weight: 600; margin: 76px 0 38px; letter-spacing: -0.5px; }
+
+    /* ---------- Info box ---------- */
+    .info { background: var(--peach); border-radius: 28px; padding: 44px 56px 50px; }
+    .info p { text-align: center; font-size: 19px; line-height: 1.6; max-width: 1050px; margin: 0 auto 36px; }
+    .info-row { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 24px; }
+    .info-box { border: 1.5px solid var(--peach-line); border-radius: 14px; padding: 14px 22px 18px; }
+    .info-box h4 { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+    .tools { display: flex; gap: 14px; }
+    .tools img { width: 50px; height: 50px; display: block; border-radius: 10px; }
+    .industries { font-size: 17px; line-height: 1.8; padding-top: 10px; }
+    .industries span { display: inline-block; }
+    .industries span:not(:last-child)::after { content: "|"; margin: 0 10px; color: #444; }
+
+    /* ---------- App sections ---------- */
+    .gallery { margin-top: 50px; border: 1.5px solid #ececec; border-radius: 28px; position: relative; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      padding: 0 14px; display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px;
+      border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px);
+      transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .gallery:not(.open) { min-height: 40px; }
+
+    .app-wrap { padding: 50px 26px 26px; display: flex; flex-direction: column; gap: 20px; }
+    .row { display: grid; gap: 20px; }
+    .r-top { grid-template-columns: 1fr 4.6fr; }
+    .r-mid { grid-template-columns: 1fr 1.42fr; }
+
+    .panel {
+      border-radius: 16px; padding: 18px 18px 14px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .panel.light { background: var(--light); }
+    .panel.tan { background: var(--tan); }
+    .panel.brown { background: var(--brown); }
+    .panel h4 { text-align: center; font-size: 19px; font-weight: 600; margin-top: 14px; }
+    .panel.light h4 { color: #C0601A; }
+    .panel.tan h4, .panel.brown h4 { color: #2a1c12; }
+
+    .icon-panel { align-items: center; text-align: center; justify-content: flex-start; }
+    .app-icon { width: 100%; max-width: 160px; aspect-ratio: 1; border-radius: 22%; overflow: hidden; background: #f3d9c6; cursor: pointer; }
+    .app-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .icon-panel h4 { margin-top: 12px; }
+    .icon-panel p { font-size: 16px; line-height: 1.5; margin-top: 6px; color: #222; }
+
+    .strip { display: flex; gap: 6px; align-items: flex-start; }   /* tops lined up */
+    .shot {
+      flex: 1; min-width: 0; overflow: hidden; border-radius: 8px;
+      background: rgba(255,255,255,.45); cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .shot:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+    /* whole image shown, nothing cropped (the labels at the bottom of the ASO screenshots stay visible) */
+    .shot img { width: 100%; height: auto; display: block; }
+    .shot.tall { border-radius: 6px; }
+    .strip:has(.square), .strip:has(.land) { gap: 14px; }
+
+    .stickers { justify-content: space-around; align-items: center; gap: 20px; padding: 20px 0 6px; }
+    .sticker { flex: 1; max-width: 240px; height: 150px; cursor: pointer; transition: transform .3s; }
+    .sticker:hover { transform: scale(1.06) rotate(-2deg); }
+    .sticker img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 100; padding: 30px;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 10px; display: block; }
+    .lightbox .close {
+      position: absolute; top: 20px; right: 28px;
+      background: none; border: none; color: #fff; font-size: 44px; cursor: pointer; line-height: 1;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: #000; color: #fff; padding: 16px 60px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; display: block; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; display: block; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .info-row { grid-template-columns: 1fr; }
+      .r-top, .r-mid { grid-template-columns: 1fr; }
+      .icon-panel .app-icon { max-width: 130px; }
+      .strip.aso { overflow-x: auto; }
+      .strip.aso .shot { flex: 0 0 130px; }
+    }
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+      main { padding: 0 16px 60px; }
+      .page-title { font-size: 34px; margin-top: 44px; }
+      .info { padding: 28px 20px; }
+      .info p { font-size: 16px; }
+      .gallery-head { font-size: 22px; }
+      .app-wrap { padding: 40px 12px 14px; gap: 14px; }
+      .strip:has(.square), .strip:has(.land) { gap: 8px; }
+      .stickers { flex-wrap: wrap; }
+      .sticker { flex: 0 0 45%; height: 110px; }
+      .strip.aso .shot { flex: 0 0 110px; }
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="graphic-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-title">Apps</h1>
+
+    <!-- ===== Intro, tools & industries ===== -->
+    <section class="info">
+      <p>I design intuitive and visually engaging digital experiences for mobile apps and games, focusing on user needs, usability, and visual consistency. My process includes wireframing, UI design, prototyping, and creating user-friendly interfaces that balance functionality with engaging visual elements.</p>
+      <div class="info-row">
+        <div class="info-box">
+          <h4>Tools</h4>
+          <div class="tools">
+            <img src="Image/Common/Photoshop.png" alt="Photoshop">
+            <img src="Image/Common/Illustrator.png" alt="Illustrator">
+            <img src="Image/Common/Figma.png" alt="Figma">
+          </div>
+        </div>
+        <div class="info-box">
+          <h4>Industries</h4>
+          <div class="industries"><span>Games</span><span>Entertainment</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Word Search Go ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">Word Search Go <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/Word Search Go/W1.png" alt="Word Search Go app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W2.png" alt="Word Search Go ASO screenshot 1" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W3.png" alt="Word Search Go ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W4.png" alt="Word Search Go ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W5.png" alt="Word Search Go ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W6.png" alt="Word Search Go ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Search Go/W7.png" alt="Word Search Go ASO screenshot 6" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+          <div class="row r-mid">
+            <div class="panel light">
+              <div class="strip"><div class="shot wide"><img src="Image/Apps/Word Search Go/W8.png" alt="Word Search Go Feature graphic 1" loading="lazy"></div></div>
+              <h4>Feature Graphics</h4>
+            </div>
+            <div class="panel tan">
+              <div class="strip">
+                <div class="shot square"><img src="Image/Apps/Word Search Go/W9.png" alt="Word Search Go Push image 1" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Word Search Go/W10.png" alt="Word Search Go Push image 2" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Word Search Go/W11.png" alt="Word Search Go Push image 3" loading="lazy"></div>
+              </div>
+              <h4>Push Images</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel brown">
+              <div class="strip">
+                <div class="shot land"><img src="Image/Apps/Word Search Go/W12.png" alt="Word Search Go Event image 1" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Word Search Go/W13.png" alt="Word Search Go Event image 2" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Word Search Go/W14.png" alt="Word Search Go Event image 3" loading="lazy"></div>
+              </div>
+              <h4>Event Images</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Ace Maze ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">Ace Maze <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/Ace Maze/A1.png" alt="Ace Maze app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A2.png" alt="Ace Maze ASO screenshot 1" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A3.png" alt="Ace Maze ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A4.png" alt="Ace Maze ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A5.png" alt="Ace Maze ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A6.png" alt="Ace Maze ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Ace Maze/A7.png" alt="Ace Maze ASO screenshot 6" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+          <div class="row r-mid">
+            <div class="panel light">
+              <div class="strip"><div class="shot wide"><img src="Image/Apps/Ace Maze/A8.png" alt="Ace Maze Feature graphic 1" loading="lazy"></div></div>
+              <h4>Feature Graphics</h4>
+            </div>
+            <div class="panel tan">
+              <div class="strip">
+                <div class="shot square"><img src="Image/Apps/Ace Maze/A9.png" alt="Ace Maze Push image 1" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Ace Maze/A10.png" alt="Ace Maze Push image 2" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Ace Maze/A11.png" alt="Ace Maze Push image 3" loading="lazy"></div>
+              </div>
+              <h4>Push Images</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel brown">
+              <div class="strip">
+                <div class="shot land"><img src="Image/Apps/Ace Maze/A12.png" alt="Ace Maze Event image 1" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Ace Maze/A13.png" alt="Ace Maze Event image 2" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Ace Maze/A14.png" alt="Ace Maze Event image 3" loading="lazy"></div>
+              </div>
+              <h4>Event Images</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMHO ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">IMHO <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/IMHO/I1.png" alt="IMHO app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/IMHO/I2.png" alt="IMHO ASO screenshot 1" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/IMHO/I3.png" alt="IMHO ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/IMHO/I4.png" alt="IMHO ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/IMHO/I5.png" alt="IMHO ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/IMHO/I6.png" alt="IMHO ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/IMHO/I7.png" alt="IMHO ASO screenshot 6" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel light">
+              <div class="strip stickers">
+                <div class="sticker"><img src="Image/Apps/IMHO/I8.png" alt="IMHO Snap sticker 1" loading="lazy"></div>
+                <div class="sticker"><img src="Image/Apps/IMHO/I9.png" alt="IMHO Snap sticker 2" loading="lazy"></div>
+                <div class="sticker"><img src="Image/Apps/IMHO/I10.png" alt="IMHO Snap sticker 3" loading="lazy"></div>
+                <div class="sticker"><img src="Image/Apps/IMHO/I11.png" alt="IMHO Snap sticker 4" loading="lazy"></div>
+              </div>
+              <h4>Snap Stickers</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Imagine AI ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">Imagine AI <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/Imagine AI/AI1.png" alt="Imagine AI app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI2.png" alt="Imagine AI ASO screenshot 1" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI3.png" alt="Imagine AI ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI4.png" alt="Imagine AI ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI5.png" alt="Imagine AI ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI6.png" alt="Imagine AI ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Imagine AI/AI7.png" alt="Imagine AI ASO screenshot 6" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Worm Out ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">Worm Out <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/Worm Out/WO1.png" alt="Worm Out app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO2.png" alt="Worm Out ASO screenshot 1" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO3.png" alt="Worm Out ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO4.png" alt="Worm Out ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO5.png" alt="Worm Out ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO6.png" alt="Worm Out ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO7.png" alt="Worm Out ASO screenshot 6" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Worm Out/WO8.png" alt="Worm Out ASO screenshot 7" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Word Meadows ===== -->
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">Word Meadows <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="app-wrap">
+          <div class="row r-top">
+            <div class="panel light icon-panel">
+              <div class="app-icon"><img src="Image/Apps/Word Meadows/WM1.png" alt="Word Meadows app icon"></div>
+              <h4>App Icon</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div class="panel light">
+              <div class="strip aso">
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM3.png" alt="Word Meadows ASO screenshot 2" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM4.png" alt="Word Meadows ASO screenshot 3" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM5.png" alt="Word Meadows ASO screenshot 4" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM6.png" alt="Word Meadows ASO screenshot 5" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM7.png" alt="Word Meadows ASO screenshot 6" loading="lazy"></div>
+                <div class="shot tall"><img src="Image/Apps/Word Meadows/WM2.png" alt="Word Meadows ASO screenshot 1" loading="lazy"></div>
+              </div>
+              <h4>ASO Screenshots</h4>
+            </div>
+          </div>
+          <div class="row r-mid">
+            <div class="panel light">
+              <div class="strip"><div class="shot wide"><img src="Image/Apps/Word Meadows/WM8.png" alt="Word Meadows Feature graphic 1" loading="lazy"></div></div>
+              <h4>Feature Graphics</h4>
+            </div>
+            <div class="panel tan">
+              <div class="strip">
+                <div class="shot square"><img src="Image/Apps/Word Meadows/WM9.png" alt="Word Meadows Push image 1" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Word Meadows/WM10.png" alt="Word Meadows Push image 2" loading="lazy"></div>
+                <div class="shot square"><img src="Image/Apps/Word Meadows/WM11.png" alt="Word Meadows Push image 3" loading="lazy"></div>
+              </div>
+              <h4>Push Images</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel brown">
+              <div class="strip">
+                <div class="shot land"><img src="Image/Apps/Word Meadows/WM12.png" alt="Word Meadows Event image 1" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Word Meadows/WM13.png" alt="Word Meadows Event image 2" loading="lazy"></div>
+                <div class="shot land"><img src="Image/Apps/Word Meadows/WM14.png" alt="Word Meadows Event image 3" loading="lazy"></div>
+              </div>
+              <h4>Event Images</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    // Collapse / expand each app section
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) { b.style.maxHeight = b.scrollHeight + 'px'; });
+    }
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) { img.addEventListener('load', fit); });
+
+    // Click any image to view it large
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+    document.querySelectorAll('.shot, .sticker, .app-icon').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>
